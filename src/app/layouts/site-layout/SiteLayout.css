@@ -1,0 +1,102 @@
+.site-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+  }
+  
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid #e5e7eb;
+    backdrop-filter: blur(10px);
+  }
+  
+  .site-header__inner {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  
+  .site-logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: #111827;
+  }
+  
+  .site-logo--footer {
+    margin-bottom: 8px;
+  }
+  
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .site-nav__link {
+    color: #4b5563;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+  
+  .site-nav__link:hover {
+    color: #111827;
+  }
+  
+  .site-nav__link--active {
+    color: #2563eb;
+  }
+  
+  .site-main {
+    flex: 1;
+  }
+  
+  .site-footer {
+    padding: 32px 0;
+    border-top: 1px solid #e5e7eb;
+    background: #ffffff;
+  }
+  
+  .site-footer__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  
+  .site-footer__text {
+    margin: 0;
+    color: #6b7280;
+  }
+  
+  .site-footer__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .site-footer__contacts a {
+    color: #374151;
+  }
+  
+  @media (max-width: 768px) {
+    .site-header__inner {
+      flex-wrap: wrap;
+      padding: 14px 0;
+    }
+  
+    .site-nav {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  
+    .site-footer__inner {
+      flex-direction: column;
+    }
+  }

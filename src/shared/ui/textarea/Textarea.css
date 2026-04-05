@@ -1,0 +1,35 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .field__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+  }
+  
+  .field__textarea {
+    min-height: 140px;
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .field__textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+  }
+  
+  .field__textarea--error {
+    border-color: #dc2626;
+  }
+  
+  .field__error {
+    font-size: 13px;
+    color: #dc2626;
+  }

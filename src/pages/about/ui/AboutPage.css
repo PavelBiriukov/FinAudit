@@ -1,0 +1,88 @@
+.about-page {
+    background: #ffffff;
+  }
+  
+  .inner-hero {
+    padding: 56px 0 16px;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  }
+  
+  .section {
+    padding: 80px 0;
+  }
+  
+  .section--gray {
+    background: #f9fafb;
+  }
+  
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .about-card {
+    padding: 28px;
+    border-radius: 22px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+  }
+  
+  .about-card h3 {
+    margin: 0 0 12px;
+    font-size: 24px;
+    color: #111827;
+  }
+  
+  .about-card p {
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.7;
+  }
+  
+  .principles-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .principle-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px;
+    border-radius: 20px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+  }
+  
+  .principle-item__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: #dcfce7;
+    color: #166534;
+    font-weight: 700;
+  }
+  
+  .principle-item p {
+    margin: 0;
+    color: #374151;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 1024px) {
+    .about-grid,
+    .principles-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .section {
+      padding: 64px 0;
+    }
+  }

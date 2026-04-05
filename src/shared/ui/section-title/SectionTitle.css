@@ -1,0 +1,38 @@
+.section-title {
+    max-width: 760px;
+    margin-bottom: 36px;
+  }
+  
+  .section-title__eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #2563eb;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  
+  .section-title__heading {
+    margin: 0 0 14px;
+    font-size: 40px;
+    line-height: 1.2;
+    color: #111827;
+  }
+  
+  .section-title__description {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #6b7280;
+  }
+  
+  @media (max-width: 768px) {
+    .section-title__heading {
+      font-size: 30px;
+    }
+  
+    .section-title__description {
+      font-size: 16px;
+    }
+  }
