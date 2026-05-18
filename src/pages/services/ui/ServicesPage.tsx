@@ -31,12 +31,6 @@ export const ServicesPage = () => {
         </Container>
       </section>
 
-      <div className="services-page__actions">
-        <Link to="/calculator" className="button button--primary">
-          Рассчитать стоимость услуг
-        </Link>
-      </div>
-
       <section className="section section--gray">
         <Container>
           <SectionTitle
