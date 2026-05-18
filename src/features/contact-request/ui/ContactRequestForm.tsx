@@ -118,7 +118,7 @@ export const ContactRequestForm = () => {
         </Button>
 
         <p className="contact-form__hint">
-          После отправки данные уйдут на API `POST /contact-requests`.
+          После отправки заявки специалист компании свяжется с вами для уточнения деталей.
         </p>
       </div>
 
