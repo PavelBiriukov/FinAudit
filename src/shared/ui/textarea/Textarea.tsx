@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './Textarea.css';
 
 type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -6,22 +6,32 @@ type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
   error?: string;
 };
 
-export const Textarea = ({ label, error, id, ...props }: TextareaProps) => {
-  const textareaId = id ?? `textarea-${label}`;
+const normalizeId = (value: string) =>
+  value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-_]/g, '');
 
-  return (
-    <div className="field">
-      <label className="field__label" htmlFor={textareaId}>
-        {label}
-      </label>
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ label, error, id, name, ...props }, ref) => {
+    const textareaId =
+      id ?? (name ? `textarea-${normalizeId(name)}` : `textarea-${normalizeId(label)}`);
 
-      <textarea
-        id={textareaId}
-        className={`field__textarea ${error ? 'field__textarea--error' : ''}`}
-        {...props}
-      />
+    return (
+      <div className="field">
+        <label className="field__label" htmlFor={textareaId}>
+          {label}
+        </label>
 
-      {error ? <span className="field__error">{error}</span> : null}
-    </div>
-  );
-};
+        <textarea
+          ref={ref}
+          id={textareaId}
+          name={name}
+          className={`field__textarea ${error ? 'field__textarea--error' : ''}`}
+          {...props}
+        />
+
+        {error ? <span className="field__error">{error}</span> : null}
+      </div>
+    );
+  },
+);
+
+Textarea.displayName = 'Textarea';

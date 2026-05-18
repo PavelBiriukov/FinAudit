@@ -1,27 +1,36 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './Input.css';
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> & {
   label: string;
   error?: string;
 };
 
-export const Input = ({ label, error, id, ...props }: InputProps) => {
-  const inputId = id ?? `input-${label}`;
+const normalizeId = (value: string) =>
+  value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-_]/g, '');
 
-  return (
-    <div className="field">
-      <label className="field__label" htmlFor={inputId}>
-        {label}
-      </label>
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ label, error, id, name, ...props }, ref) => {
+    const inputId = id ?? (name ? `input-${normalizeId(name)}` : `input-${normalizeId(label)}`);
 
-      <input
-        id={inputId}
-        className={`field__input ${error ? 'field__input--error' : ''}`}
-        {...props}
-      />
+    return (
+      <div className="field">
+        <label className="field__label" htmlFor={inputId}>
+          {label}
+        </label>
 
-      {error ? <span className="field__error">{error}</span> : null}
-    </div>
-  );
-};
+        <input
+          ref={ref}
+          id={inputId}
+          name={name}
+          className={`field__input ${error ? 'field__input--error' : ''}`}
+          {...props}
+        />
+
+        {error ? <span className="field__error">{error}</span> : null}
+      </div>
+    );
+  },
+);
+
+Input.displayName = 'Input';

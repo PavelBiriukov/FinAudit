@@ -1,0 +1,145 @@
+.admin-projects-page {
+    background: #ffffff;
+  }
+  
+  .section {
+    padding: 80px 0;
+  }
+  
+  .admin-projects-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  .admin-projects-header__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .admin-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .admin-project-card {
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    background: #ffffff;
+    display: grid;
+    gap: 18px;
+  }
+  
+  .admin-project-card__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .admin-project-card__top h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #111827;
+  }
+  
+  .admin-project-card__description {
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.7;
+  }
+  
+  .admin-project-card__meta {
+    display: grid;
+    gap: 12px;
+  }
+  
+  .admin-project-card__meta div {
+    display: grid;
+    gap: 4px;
+  }
+  
+  .admin-project-card__meta span {
+    font-size: 14px;
+    color: #6b7280;
+  }
+  
+  .admin-project-card__meta strong {
+    color: #111827;
+  }
+  
+  .admin-project-card__meta small {
+    color: #6b7280;
+  }
+  
+  .admin-projects-empty {
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    color: #6b7280;
+    background: #ffffff;
+  }
+  
+  .admin-projects-error {
+    color: #dc2626;
+    font-weight: 600;
+  }
+  
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  
+  .status-badge--new {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+  
+  .status-badge--in_progress {
+    background: #e0e7ff;
+    color: #4338ca;
+  }
+  
+  .status-badge--waiting_for_client {
+    background: #fef3c7;
+    color: #b45309;
+  }
+  
+  .status-badge--completed {
+    background: #dcfce7;
+    color: #166534;
+  }
+  
+  .status-badge--archived {
+    background: #e5e7eb;
+    color: #4b5563;
+  }
+  
+  @media (max-width: 1024px) {
+    .admin-projects-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .admin-projects-header {
+      flex-direction: column;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .section {
+      padding: 64px 0;
+    }
+  
+    .admin-project-card__top {
+      flex-direction: column;
+    }
+  }

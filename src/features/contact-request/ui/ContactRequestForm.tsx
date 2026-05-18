@@ -1,150 +1,144 @@
-import { FormEvent, useMemo, useState } from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '../../../shared/ui/button/Button';
 import { Input } from '../../../shared/ui/input/Input';
 import { Textarea } from '../../../shared/ui/textarea/Textarea';
-import { ContactRequestFormValues } from '../model/types';
+import {
+  contactRequestSchema,
+  ContactRequestFormValues,
+} from '../model/contactRequestSchema';
+import { sendContactRequest } from '../api/sendContactRequest';
 import './ContactRequestForm.css';
 
-type ContactRequestErrors = Partial<Record<keyof ContactRequestFormValues, string>>;
-
-const initialValues: ContactRequestFormValues = {
+const defaultValues: ContactRequestFormValues = {
   name: '',
   email: '',
   phone: '',
   message: '',
 };
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 export const ContactRequestForm = () => {
-  const [values, setValues] = useState<ContactRequestFormValues>(initialValues);
-  const [errors, setErrors] = useState<ContactRequestErrors>({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState('');
+  const [submitError, setSubmitError] = useState('');
 
-  const isFormFilled = useMemo(() => {
-    return (
-      values.name.trim().length > 0 &&
-      values.email.trim().length > 0 &&
-      values.phone.trim().length > 0 &&
-      values.message.trim().length > 0
-    );
-  }, [values]);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactRequestFormValues>({
+    resolver: zodResolver(contactRequestSchema),
+    defaultValues,
+    mode: 'onTouched',
+  });
 
-  const validate = (): ContactRequestErrors => {
-    const nextErrors: ContactRequestErrors = {};
-
-    if (!values.name.trim()) {
-      nextErrors.name = 'Введите имя';
-    } else if (values.name.trim().length < 2) {
-      nextErrors.name = 'Имя слишком короткое';
+  const clearSubmitState = () => {
+    if (submitSuccess) {
+      setSubmitSuccess('');
     }
 
-    if (!values.email.trim()) {
-      nextErrors.email = 'Введите email';
-    } else if (!emailRegex.test(values.email.trim())) {
-      nextErrors.email = 'Некорректный email';
-    }
-
-    if (!values.phone.trim()) {
-      nextErrors.phone = 'Введите номер телефона';
-    } else if (values.phone.replace(/\D/g, '').length < 6) {
-      nextErrors.phone = 'Слишком короткий номер';
-    }
-
-    if (!values.message.trim()) {
-      nextErrors.message = 'Опишите вашу задачу';
-    } else if (values.message.trim().length < 10) {
-      nextErrors.message = 'Сообщение слишком короткое';
-    }
-
-    return nextErrors;
-  };
-
-  const handleChange = (
-    field: keyof ContactRequestFormValues,
-    value: string,
-  ) => {
-    setValues((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-
-    setErrors((prev) => ({
-      ...prev,
-      [field]: '',
-    }));
-
-    if (isSubmitted) {
-      setIsSubmitted(false);
+    if (submitError) {
+      setSubmitError('');
     }
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = async (values: ContactRequestFormValues) => {
+    setSubmitSuccess('');
+    setSubmitError('');
 
-    const nextErrors = validate();
-    setErrors(nextErrors);
+    try {
+      const response = await sendContactRequest(values);
 
-    if (Object.keys(nextErrors).length > 0) {
-      return;
+      setSubmitSuccess(
+        response.message || 'Заявка успешно отправлена. Я скоро свяжусь с вами.',
+      );
+      reset(defaultValues);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : 'Не удалось отправить заявку. Попробуйте позже.',
+      );
     }
-
-    console.log('Contact request data:', values);
-
-    setIsSubmitted(true);
-    setValues(initialValues);
   };
 
   return (
-    <form id="contact-form" className="contact-form" onSubmit={handleSubmit}>
+    <form
+      id="contact-form"
+      className="contact-form"
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+      onChangeCapture={clearSubmitState}
+    >
       <div className="contact-form__grid">
         <Input
           label="Имя"
           placeholder="Введите имя"
-          value={values.name}
-          onChange={(event) => handleChange('name', event.target.value)}
-          error={errors.name}
+          autoComplete="name"
+          disabled={isSubmitting}
+          error={errors.name?.message}
+          {...register('name')}
         />
 
         <Input
           label="Email"
           type="email"
           placeholder="Введите email"
-          value={values.email}
-          onChange={(event) => handleChange('email', event.target.value)}
-          error={errors.email}
+          autoComplete="email"
+          disabled={isSubmitting}
+          error={errors.email?.message}
+          {...register('email')}
         />
 
         <Input
           label="Телефон"
+          type="tel"
           placeholder="Введите номер телефона"
-          value={values.phone}
-          onChange={(event) => handleChange('phone', event.target.value)}
-          error={errors.phone}
+          autoComplete="tel"
+          disabled={isSubmitting}
+          error={errors.phone?.message}
+          {...register('phone')}
         />
 
         <div className="contact-form__message">
           <Textarea
             label="Сообщение"
             placeholder="Опишите ваш запрос"
-            value={values.message}
-            onChange={(event) => handleChange('message', event.target.value)}
-            error={errors.message}
+            disabled={isSubmitting}
+            error={errors.message?.message}
+            {...register('message')}
           />
         </div>
       </div>
 
       <div className="contact-form__actions">
-        <Button type="submit" disabled={!isFormFilled}>
-          Отправить заявку
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
         </Button>
 
-        {isSubmitted ? (
-          <p className="contact-form__success">
-            Заявка заполнена. Следующий шаг — подключить реальный API.
-          </p>
-        ) : null}
+        <p className="contact-form__hint">
+          После отправки данные уйдут на API `POST /contact-requests`.
+        </p>
       </div>
+
+      {submitSuccess ? (
+        <p
+          className="contact-form__feedback contact-form__feedback--success"
+          aria-live="polite"
+        >
+          {submitSuccess}
+        </p>
+      ) : null}
+
+      {submitError ? (
+        <p
+          className="contact-form__feedback contact-form__feedback--error"
+          aria-live="polite"
+        >
+          {submitError}
+        </p>
+      ) : null}
     </form>
   );
 };

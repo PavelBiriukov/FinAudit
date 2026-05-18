@@ -1,40 +1,9 @@
 import { Container } from '../../../shared/ui/container/Container';
 import { SectionTitle } from '../../../shared/ui/section-title/SectionTitle';
 import { ContactRequestForm } from '../../../features/contact-request';
+import { services } from '../../../shared/config/services';
 import './ServicesPage.css';
-
-const services = [
-  {
-    title: 'Обязательный аудит',
-    description:
-      'Проведение обязательного аудита финансовой отчетности с подготовкой заключения и рекомендаций.',
-  },
-  {
-    title: 'Инициативный аудит',
-    description:
-      'Проверка по инициативе собственников или руководства для оценки рисков и качества внутреннего контроля.',
-  },
-  {
-    title: 'Налоговый консалтинг',
-    description:
-      'Анализ налоговой нагрузки, выявление рисков и подготовка решений для безопасной работы компании.',
-  },
-  {
-    title: 'Финансовый анализ',
-    description:
-      'Оценка финансовой устойчивости, ликвидности, прибыльности и эффективности бизнес-процессов.',
-  },
-  {
-    title: 'Подготовка отчетности',
-    description:
-      'Методическая помощь в формировании финансовой и управленческой отчетности для бизнеса.',
-  },
-  {
-    title: 'Сопровождение проверок',
-    description:
-      'Поддержка компании во время внешних и внутренних проверок, помощь в подготовке документов и позиции.',
-  },
-];
+import { Link } from 'react-router-dom';
 
 export const ServicesPage = () => {
   return (
@@ -53,7 +22,7 @@ export const ServicesPage = () => {
         <Container>
           <div className="services-grid">
             {services.map((service) => (
-              <article key={service.title} className="service-card">
+              <article key={service.id} className="service-card">
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
               </article>
@@ -62,12 +31,18 @@ export const ServicesPage = () => {
         </Container>
       </section>
 
+      <div className="services-page__actions">
+        <Link to="/calculator" className="button button--primary">
+          Рассчитать стоимость услуг
+        </Link>
+      </div>
+
       <section className="section section--gray">
         <Container>
           <SectionTitle
             eyebrow="Обсудить проект"
             title="Оставь заявку на консультацию"
-            description="Если человек дошёл до страницы услуг, ему надо не читать ещё три экрана текста, а дать понятный CTA."
+            description="Если человек дошёл до страницы услуг, ему не нужен ещё один бесполезный экран текста. Нужен нормальный CTA."
           />
 
           <ContactRequestForm />

@@ -1,0 +1,38 @@
+.client-login-page {
+    background: #ffffff;
+  }
+  
+  .section {
+    padding: 80px 0;
+  }
+  
+  .client-login-card {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 32px;
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    background: #ffffff;
+  }
+  
+  .client-login-card h1 {
+    margin: 0 0 12px;
+    font-size: 32px;
+    color: #111827;
+  }
+  
+  .client-login-card p {
+    margin: 0 0 24px;
+    color: #6b7280;
+  }
+  
+  .client-login-form {
+    display: grid;
+    gap: 20px;
+  }
+  
+  .client-login-error {
+    margin: 0;
+    color: #dc2626;
+    font-weight: 600;
+  }

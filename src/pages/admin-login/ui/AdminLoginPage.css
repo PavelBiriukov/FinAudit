@@ -1,0 +1,38 @@
+.admin-login-page {
+    background: #ffffff;
+  }
+  
+  .section {
+    padding: 80px 0;
+  }
+  
+  .admin-login-card {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 32px;
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    background: #ffffff;
+  }
+  
+  .admin-login-card h1 {
+    margin: 0 0 12px;
+    font-size: 32px;
+    color: #111827;
+  }
+  
+  .admin-login-card p {
+    margin: 0 0 24px;
+    color: #6b7280;
+  }
+  
+  .admin-login-form {
+    display: grid;
+    gap: 20px;
+  }
+  
+  .admin-login-error {
+    margin: 0;
+    color: #dc2626;
+    font-weight: 600;
+  }

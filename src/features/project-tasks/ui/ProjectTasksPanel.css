@@ -1,0 +1,137 @@
+.project-tasks-panel {
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    background: #ffffff;
+  }
+  
+  .project-tasks-panel h2 {
+    margin: 0 0 18px;
+    font-size: 24px;
+    color: #111827;
+  }
+  
+  .project-task-form {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .project-task-field {
+    display: grid;
+    gap: 8px;
+  }
+  
+  .project-task-field span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+  }
+  
+  .project-task-field select,
+  .project-task-card__meta select {
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: #ffffff;
+    outline: none;
+  }
+  
+  .project-tasks-error {
+    margin: 0 0 16px;
+    color: #dc2626;
+    font-weight: 600;
+  }
+  
+  .project-tasks-empty {
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+    color: #6b7280;
+    background: #f9fafb;
+  }
+  
+  .project-tasks-list {
+    display: grid;
+    gap: 14px;
+  }
+  
+  .project-task-card {
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    background: #f9fafb;
+  }
+  
+  .project-task-card__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  
+  .project-task-card h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    color: #111827;
+  }
+  
+  .project-task-card p {
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+  
+  .project-task-card__meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  
+  .project-task-card__meta div {
+    display: grid;
+    gap: 6px;
+  }
+  
+  .project-task-card__meta span {
+    font-size: 13px;
+    color: #6b7280;
+  }
+  
+  .task-priority {
+    display: inline-flex;
+    min-height: 30px;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  
+  .task-priority--low {
+    background: #e5e7eb;
+    color: #4b5563;
+  }
+  
+  .task-priority--medium {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+  
+  .task-priority--high {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+  
+  @media (max-width: 768px) {
+    .project-task-card__top {
+      flex-direction: column;
+    }
+  
+    .project-task-card__meta {
+      grid-template-columns: 1fr;
+    }
+  }

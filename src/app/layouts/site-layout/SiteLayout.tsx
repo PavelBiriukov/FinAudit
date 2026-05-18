@@ -1,6 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { Container } from '../../../shared/ui/container/Container';
-import { Button } from '../../../shared/ui/button/Button';
 import './SiteLayout.css';
 
 const getNavLinkClassName = ({ isActive }: { isActive: boolean }) =>
@@ -26,11 +25,17 @@ export const SiteLayout = () => {
               <NavLink to="/about" className={getNavLinkClassName}>
                 О компании
               </NavLink>
+              <NavLink to="/contacts" className={getNavLinkClassName}>
+                Контакты
+              </NavLink>
+              <NavLink to="/calculator" className={getNavLinkClassName}>
+                Калькулятор
+              </NavLink>
             </nav>
 
-            <a href="#contact-form">
-              <Button variant="outline">Оставить заявку</Button>
-            </a>
+            <NavLink to="/contacts" className="button button--outline">
+              Оставить заявку
+            </NavLink>
           </div>
         </Container>
       </header>

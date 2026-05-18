@@ -23,10 +23,24 @@
     margin-top: 24px;
   }
   
-  .contact-form__success {
+  .contact-form__hint {
     margin: 0;
-    color: #166534;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .contact-form__feedback {
+    margin: 16px 0 0;
     font-weight: 600;
+  }
+  
+  .contact-form__feedback--success {
+    color: #166534;
+  }
+  
+  .contact-form__feedback--error {
+    color: #dc2626;
   }
   
   @media (max-width: 768px) {

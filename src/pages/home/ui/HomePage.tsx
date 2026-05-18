@@ -1,24 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Container } from '../../../shared/ui/container/Container';
-import { Button } from '../../../shared/ui/button/Button';
 import { SectionTitle } from '../../../shared/ui/section-title/SectionTitle';
 import { ContactRequestForm } from '../../../features/contact-request';
+import { services } from '../../../shared/config/services';
 import './HomePage.css';
 
-const servicesPreview = [
-  {
-    title: 'Аудиторские проверки',
-    text: 'Обязательный и инициативный аудит с понятными выводами и рекомендациями для бизнеса.',
-  },
-  {
-    title: 'Налоговый консалтинг',
-    text: 'Снижение рисков, анализ спорных зон и сопровождение при взаимодействии с контролирующими органами.',
-  },
-  {
-    title: 'Финансовый анализ',
-    text: 'Оценка эффективности компании, выявление слабых мест и подготовка управленческих решений.',
-  },
-];
+const servicesPreview = services.slice(0, 3);
 
 const advantages = [
   'Понятная коммуникация без лишней бюрократии',
@@ -46,12 +33,12 @@ export const HomePage = () => {
               </p>
 
               <div className="hero__actions">
-                <a href="#contact-form">
-                  <Button>Оставить заявку</Button>
-                </a>
+                <Link to="/contacts" className="button button--primary">
+                  Оставить заявку
+                </Link>
 
-                <Link to="/services">
-                  <Button variant="secondary">Наши услуги</Button>
+                <Link to="/services" className="button button--secondary">
+                  Наши услуги
                 </Link>
               </div>
 
@@ -99,16 +86,16 @@ export const HomePage = () => {
 
           <div className="cards-grid">
             {servicesPreview.map((service) => (
-              <article key={service.title} className="info-card">
+              <article key={service.id} className="info-card">
                 <h3>{service.title}</h3>
-                <p>{service.text}</p>
+                <p>{service.description}</p>
               </article>
             ))}
           </div>
 
           <div className="section__actions">
-            <Link to="/services">
-              <Button variant="outline">Смотреть все услуги</Button>
+            <Link to="/services" className="button button--outline">
+              Смотреть все услуги
             </Link>
           </div>
         </Container>
@@ -138,7 +125,7 @@ export const HomePage = () => {
           <SectionTitle
             eyebrow="Заявка"
             title="Свяжись с нами"
-            description="Пока это клиентская форма без интеграции с сервером. Для первого этапа этого достаточно."
+            description="Теперь форма уже не декоративная: она валидируется и реально отправляет данные на API."
           />
 
           <ContactRequestForm />
